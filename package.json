@@ -4,6 +4,7 @@
   "description": "Mean app using node and angular",
   "main": "app.js",
   "scripts": {
+    "clean": "rimraf public/scripts",
     "start": " node server.js",
     "tsc": "tsc ./public/scripts/main.ts",
     "nodemon": "nodemon server.js",
