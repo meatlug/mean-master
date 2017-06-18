@@ -19,6 +19,7 @@ const passport = require('passport');
 const app = express();
 const models = path.join(__dirname, 'src/app/models');
 const port = process.env.PORT || 8080;
+const mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost/mean_app';
 
 
 //Bootstrap models
@@ -38,15 +39,15 @@ function listen() {
     console.log('express started on port' + port);
 }
 
-function connect(){
-   var options = { server: { socketOptions: { keepAlive: 1 } } };
-  return mongoose.connect(process.env.DB_HOST, options).connection;
+function connect() {
+    var options = { server: { socketOptions: { keepAlive: 1 } } };
+    return mongoose.connect(mongodbUri, options).connection;
 }
 
 connect()
-  .on('error', console.log)
-  .on('disconnected', connect)
-  .once('open', listen);
+    .on('error', console.log)
+    .on('disconnected', connect)
+    .once('open', listen);
 
 /**
  * Expose
