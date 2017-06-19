@@ -21,6 +21,7 @@ const models = path.join(__dirname, 'src/app/models');
 const port = process.env.PORT || 8080;
 const mongodbUri = process.env.MONGODB_URI || 'mongodb://localhost/mean_app';
 
+mongoose.Promise = global.Promise;
 
 //Bootstrap models
 fs.readdirSync(models)

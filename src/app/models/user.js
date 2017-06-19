@@ -7,10 +7,8 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
 const crypto = require('crypto');
-
 const Schema = mongoose.Schema;
-
-var User = mongoose.model('User', {
+const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
@@ -19,7 +17,7 @@ var User = mongoose.model('User', {
         unique: true,
         validate: {
             validator: validator.isEmail,
-            message: '{value} is not a valid email'
+            message: 'value is not a valid email'
         },
     },
     password: {
@@ -39,5 +37,4 @@ var User = mongoose.model('User', {
     }]
 });
 
-
-module.exports = { User };
+mongoose.model('User', UserSchema);
