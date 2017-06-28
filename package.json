@@ -5,10 +5,9 @@
   "main": "app.js",
   "scripts": {
     "clean": "rimraf public/scripts",
-    "start": "npm run nodemon",
-    "tsc": "tsc ./public/scripts/main.ts",
+    "start": "npm run clean && npm run build && npm run nodemon",
     "nodemon": "nodemon server.js",
-    "webpack": "webpack"
+    "build": "webpack"
   },
   "homepage": "https://github.com/meatlug/mean-master",
   "bugs": "https://github.com/meatlug/mean-master/issues",
