@@ -5,7 +5,9 @@
   "main": "app.js",
   "scripts": {
     "clean": "rimraf public/scripts",
-    "start": "npm run clean && npm run build && npm run nodemon",
+    "prestart": "npm run clean",
+    "start": "npm run build",
+    "poststart": "npm run nodemon",
     "nodemon": "nodemon server.js",
     "build": "webpack"
   },

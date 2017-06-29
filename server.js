@@ -37,7 +37,7 @@ require('./src/config/routes')(app, passport);
 function listen() {
     app.listen(port);
     debug('Listening on ' + port);
-    console.log('express started on port' + port);
+    console.log('express started on port ' + port);
 }
 
 function connect() {
