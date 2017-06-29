@@ -18,28 +18,33 @@ module.exports = {
     rules: [
       {
         test: /\.ts$/,
-        loaders: [
+        use: [
+          // Support for .ts files.
           {
             loader: 'awesome-typescript-loader',
             options: { configFileName: helpers.root('client', 'tsconfig.json') }
           }, 'angular2-template-loader'
         ]
       },
+      // Support for *.json files.
+      { test: /\.json$/, use: ['json-loader'] },
+
+      // support for .html 
       {
         test: /\.html$/,
-        loader: 'html-loader'
+        use: ['html-loader']
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file-loader?name=assets/[name].[hash].[ext]'
+        use: ['file-loader?name=assets/[name].[hash].[ext]']
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract({ fallbackLoader: 'style-loader', loader: 'css-loader?sourceMap' })
+        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap' })
       },
       {
         test: /\.css$/,
-        loader: 'raw-loader'
+        use: ['raw-loader']
       }
     ]
   },
@@ -54,7 +59,9 @@ module.exports = {
     ),
 
     new webpack.optimize.CommonsChunkPlugin({
-      name: ['app', 'vendor', 'polyfills']
+      name: ['app', 'vendor', 'polyfills'],
+      filename: '[name].bundle.js',
+      minChunks: Infinity
     }),
 
     new HtmlWebpackPlugin({

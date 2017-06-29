@@ -4,6 +4,7 @@
   "description": "Mean app using node and angular",
   "main": "app.js",
   "scripts": {
+    "clean:install": "npm set progress=false && npm install",
     "clean": "rimraf public/scripts",
     "prestart": "npm run clean",
     "start": "npm run build",
