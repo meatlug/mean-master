@@ -24,7 +24,6 @@
     "docker": "docker",
     "lint": "npm run tslint \"client/**/*.ts\"",
     "prestart": "npm run clean",
-    "postinstall": "npm run webpack",
     "start": "concurrently \"npm run webpack\" \"npm run nodemon\"",
     "nodemon": "nodemon server.js",
     "rimraf": "rimraf",
