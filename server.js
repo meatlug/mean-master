@@ -29,7 +29,7 @@ fs.readdirSync(models)
     .forEach(file => require(path.join(models, file)));
 
 //Bootstrap routes
-// require('./config/passport')(passport);
+//require('./src/config/passport')(passport);
 require('./src/config/express')(app, passport);
 require('./src/config/routes')(app, passport);
 

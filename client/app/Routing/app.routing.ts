@@ -6,7 +6,7 @@ import { PathNotFoundComponent } from '../Components/pathNotFound/pathNotFound.c
 const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: LoginComponent },
-    { path: "", component: LoginComponent },
+    { path: '', component: LoginComponent },
     { path: '**', pathMatch: 'full', component: PathNotFoundComponent }
 ];
 

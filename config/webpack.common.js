@@ -1,6 +1,5 @@
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var helpers = require('./helpers');
 
 module.exports = {
@@ -11,23 +10,27 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.js', 'css']
+    extensions: ['.ts', '.js', '.css']
   },
 
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.ts$/,
         use: [
           // Support for .ts files.
           {
             loader: 'awesome-typescript-loader',
-            options: { configFileName: helpers.root('client', 'tsconfig.json') }
+            options: {
+              configFileName: helpers.root('client', 'tsconfig.json')
+            }
           }, 'angular2-template-loader'
         ]
       },
       // Support for *.json files.
-      { test: /\.json$/, use: ['json-loader'] },
+      {
+        test: /\.json$/,
+        use: ['json-loader']
+      },
 
       // support for .html 
       {
@@ -36,15 +39,12 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-        use: ['file-loader?name=assets/[name].[hash].[ext]']
+        use: ['file-loader?name=images/[name].[hash].[ext]']
       },
       {
         test: /\.css$/,
-        use: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader?sourceMap' })
-      },
-      {
-        test: /\.css$/,
-        use: ['raw-loader']
+        use: ['to-string-loader', 'css-loader'],
+        exclude: [helpers.root('src', 'styles')]
       }
     ]
   },

@@ -15,7 +15,7 @@ export class AppService {
     public GetUserDetails = (data): Observable<Users[]> => {
         return this.http.post(this._configuration.ServerWithApiUrl + 'users', data, { headers: this.headers })
             .map(this.extractData)
-            .do(data => console.log(data))
+            .do((response) => console.log(response))
             .catch(this.handleError);
     }
 
@@ -26,7 +26,7 @@ export class AppService {
     }
 
     private handleError(error: Response) {
-        console.log(error)
+        console.log(error);
         return Observable.throw(error.json() || 'server error');
     }
-}
+};

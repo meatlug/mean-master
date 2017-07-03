@@ -8,7 +8,7 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', function (req, res, next) {
-    res.sendFile(path.join(process.cwd(), './public/scripts/index.html'));
+    res.sendFile(path.join(process.cwd(), './public/index.html'));
     console.log(process.cwd());
 });
 

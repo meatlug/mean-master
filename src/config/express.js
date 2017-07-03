@@ -18,5 +18,5 @@ module.exports = function (app, passport) {
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(express.static(path.join(process.cwd(), 'public')));
-    app.use(favicon(path.join(__dirname, '../..', 'public/images', 'favicon.ico')));
+    //app.use(favicon(path.join(__dirname, '../..', 'public/images', 'favicon.ico')));
 };
