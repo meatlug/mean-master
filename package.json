@@ -17,6 +17,8 @@
   "author": "Raghavan U <rockonwithraghavan@gmail.com>",
   "license": "ISC",
   "scripts": {
+    "build:docker":"docker build -f Dockerfile -t mean:latest .",
+    "ci:travis": "npm run lint",
     "clean:install": "npm set progress=false && npm install",
     "clean": "rimraf public/",
     "docker": "docker",
