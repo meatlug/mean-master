@@ -19,7 +19,7 @@ const passport = require('passport');
 const app = express();
 const models = path.join(__dirname, 'src/app/models');
 const port = process.env.PORT || 8080;
-const mongodbUri = process.env.MONGODB_URI || process.env.MONGO_PORT || 'mongodb://localhost/mean_app';
+const mongodbUri = process.env.MONGODB_PORT || 'mongodb://localhost/mean_app';
 
 mongoose.Promise = global.Promise;
 
