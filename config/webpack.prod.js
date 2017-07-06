@@ -6,7 +6,7 @@ var helpers = require('./helpers');
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
 module.exports = webpackMerge(commonConfig, {
-  devtool: 'source-map',
+  devtool: 'cheap-module-source-map',
 
   output: {
     path: helpers.root('public'),
@@ -15,21 +15,27 @@ module.exports = webpackMerge(commonConfig, {
   },
 
   plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({ // https://github.com/angular/angular/issues/10618
-      mangle: {
-        keep_fnames: true
-      }
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false
     }),
     new webpack.DefinePlugin({
       'process.env': {
-        'ENV': JSON.stringify(ENV)
+        'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new webpack.LoaderOptionsPlugin({
-      htmlLoader: {
-        minimize: false // workaround for ng2
-      }
+    new webpack.optimize.UglifyJsPlugin({
+      beautify: false,
+      mangle: {
+        screw_ie8: true,
+        keep_fnames: true
+      },
+      compress: {
+        screw_ie8: true,
+        warnings: false
+      },
+      comments: false
     })
   ]
 });
+

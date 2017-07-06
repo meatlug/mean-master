@@ -10,6 +10,7 @@
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
+const util = require('util');
 const debug = require('debug');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -19,8 +20,8 @@ const passport = require('passport');
 const app = express();
 const models = path.join(__dirname, 'src/app/models');
 const port = process.env.PORT || 8080;
-const mongodbUri = process.env.MONGODB_PORT || 'mongodb://localhost/mean_app';
-
+const mongourl = util.format('mongodb://mongo:%s/demo', process.env.MONGO_PORT);
+const mongodbUri = mongourl || 'mongodb://localhost/mean_app';
 mongoose.Promise = global.Promise;
 
 //Bootstrap models

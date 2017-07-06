@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "strict": true,
     "declaration": false,
+    "skipLibCheck": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "mapRoot": "./",
@@ -9,7 +11,11 @@
     "noEmitOnError": true,
     "noImplicitAny": false,
     "sourceMap": true,
-    "target": "es6",
+    "target": "es5",
+    "lib": [
+      "dom",
+      "es5"
+    ],
     "typeRoots": [
       "../node_modules/@types"
     ],
@@ -19,7 +25,7 @@
     ],
     "globalDependencies": {
       "core-js": "registry:dt/core-js#0.0.0+20160602141332"
-      // es6-shim will also conflict
+      // es6-shim will also conflicts
     }
   }
 }

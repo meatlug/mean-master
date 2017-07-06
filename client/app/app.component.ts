@@ -3,6 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'mean-app',
   template: `<router-outlet></router-outlet>`,
-  styleUrls:[]
+  styleUrls: []
 })
 export class AppComponent { }
