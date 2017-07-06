@@ -21,7 +21,7 @@ const app = express();
 const models = path.join(__dirname, 'src/app/models');
 const port = process.env.PORT || 8080;
 const mongourl = util.format('mongodb://mongo:%s/demo', process.env.MONGO_PORT);
-const mongodbUri = mongourl || 'mongodb://localhost/mean_app';
+const mongodbUri = 'mongodb://localhost/mean_app' || process.env.MONGODB_URI || mongourl ;
 mongoose.Promise = global.Promise;
 
 //Bootstrap models
