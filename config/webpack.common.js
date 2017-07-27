@@ -15,37 +15,37 @@ module.exports = {
 
   module: {
     rules: [{
-      test: /\.ts$/,
-      use: [
-        // Support for .ts files.
-        {
-          loader: 'awesome-typescript-loader',
-          options: {
-            configFileName: helpers.root('client', 'tsconfig.json')
-          }
-        }, 'angular2-template-loader'
-      ]
-    },
-    // Support for *.json files.
-    {
-      test: /\.json$/,
-      use: ['json-loader']
-    },
+        test: /\.ts$/,
+        use: [
+          // Support for .ts files.
+          {
+            loader: 'awesome-typescript-loader',
+            options: {
+              configFileName: helpers.root('client', 'tsconfig.json')
+            }
+          }, 'angular2-template-loader'
+        ]
+      },
+      // Support for *.json files.
+      {
+        test: /\.json$/,
+        use: ['json-loader']
+      },
 
-    // support for .html 
-    {
-      test: /\.html$/,
-      use: ['html-loader']
-    },
-    {
-      test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
-      use: ['file-loader?name=images/[name].[hash].[ext]']
-    },
-    {
-      test: /\.css$/,
-      use: ['to-string-loader', 'css-loader'],
-      exclude: [helpers.root('src', 'styles')]
-    }
+      // support for .html 
+      {
+        test: /\.html$/,
+        use: ['html-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg|woff|woff2|ttf|eot|ico)$/,
+        use: ['file-loader?name=images/[name].[hash].[ext]']
+      },
+      {
+        test: /\.scss$/,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
+        include: [helpers.root('client', 'content')]
+      }
     ]
   },
 
