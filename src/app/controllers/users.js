@@ -10,7 +10,7 @@ exports.createUser = (req, res) => {
     user.save().then(() => {
         return user.generateAuthToken();
     }).then((token) => {
-        console.log(token,'tokens');
+        console.log(token, 'tokens');
         res.header('x-auth', token).send(user);
     }).catch((e) => {
         res.status(400).send(e);
@@ -29,4 +29,14 @@ exports.getToken = (req, res, next) => {
     }).catch((e) => {
         res.status(401).send();
     })
+};
+
+exports.loginUser = (req, res) => {
+    var body = _.pick(req.body, ['email', 'password']);
+    User.findByLogin(body.email, body.password).then((user) => {
+        res.send(user);
+    })
+        .catch((e) => {
+            res.status(400).send();
+        })
 };

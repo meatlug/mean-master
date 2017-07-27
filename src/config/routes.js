@@ -14,9 +14,10 @@ const user = require(path.join(__dirname, '..', 'app/controllers/users'));
  */
 module.exports = function (app) {
     app.use('/', index);
-    app.use('*', index);
-    app.post('/users', user.createUser);
     app.get('/users/auth', user.getToken, (req, res) => {
         res.send(req.user);
     });
-};
+    app.post('/users', user.createUser);
+    app.use('*', index);
+    app.post('/users/login',user.loginUser);
+};  
