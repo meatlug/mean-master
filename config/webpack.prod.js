@@ -1,7 +1,9 @@
-var webpack = require('webpack');
-var webpackMerge = require('webpack-merge');
-var commonConfig = require('./webpack.common.js');
-var helpers = require('./helpers');
+const webpack = require('webpack');
+const helpers = require('./helpers');
+const webpackMerge = require('webpack-merge');
+const commonConfig = require('./webpack.common.js');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 
 const ENV = process.env.NODE_ENV = process.env.ENV = 'production';
 
@@ -24,6 +26,7 @@ module.exports = webpackMerge(commonConfig, {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
+    new ExtractTextPlugin('[name].[hash].css'),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: {
@@ -38,4 +41,3 @@ module.exports = webpackMerge(commonConfig, {
     })
   ]
 });
-

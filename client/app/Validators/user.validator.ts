@@ -1,7 +1,5 @@
 import { FormControl } from '@angular/forms';
 import { LoginService } from '../Services/login.service';
-import { AppService } from '../Services/app.service';
-
 
 export class UserValidator {
     // static getValidatorErrorMessage(validatorName: string, validatorValue?: any) {
@@ -14,8 +12,6 @@ export class UserValidator {
 
     //     return config[validatorName];
     // }
-
-    constructor() { }
 
     static UserNameCheck(control: FormControl, service: LoginService) {
 
@@ -32,7 +28,7 @@ export class UserValidator {
                 .GetUserDetails(control.value)
                 .subscribe(
                 data => {
-                    if (data.length == 0 || data.length == 1) {
+                    if (data.length === 0 || data.length === 1) {
                         resolve(null);
                     } else {
                         resolve({ EmpIdCheck: true });
@@ -41,7 +37,9 @@ export class UserValidator {
                 err => {
                     resolve({ EmpIdCheck: true });
                 }
-                )
+                );
         });
     }
+
+    constructor() { }
 }

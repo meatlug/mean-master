@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpModule } from '@angular/http';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routing } from '../app/Routing/app.routing';
 import { Constants } from '../app/Constants/app.constant';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Components/login/login.component';
+import { DashboardComponent } from './Components/dashboard/dashboard.component';
 import { AppService } from '../app/Services/app.service';
 import { LoginService } from '../app/Services/login.service';
 import { NavbarComponent } from './Components/navbar/navbar.component';
@@ -20,12 +21,8 @@ import { UserValidator } from './Validators/user.validator';
     HttpModule,
     ReactiveFormsModule,
     CommonModule],
-  declarations: [AppComponent, PathNotFoundComponent, LoginComponent, NavbarComponent],
-  providers: [Constants, AppService, LoginService, UserValidator],
+  declarations: [AppComponent, PathNotFoundComponent, LoginComponent, NavbarComponent, DashboardComponent],
+  providers: [Title, Constants, AppService, LoginService, UserValidator],
   bootstrap: [AppComponent]
 })
-export class AppModule {
-  Constructor() {
-
-  }
-}
+export class AppModule { }

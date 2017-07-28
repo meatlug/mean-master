@@ -12,8 +12,20 @@ export class LoginService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     constructor(private http: Http, private _configuration: Constants) { }
 
+    /**
+     * CheckUserLogin
+     */
+    public CheckUserLogin(data): Observable<Users[]> {
+        return this.http
+            .post(this._configuration.ServerWithApiUrl + 'login', data, { headers: this.headers })
+            .map(this.extractData)
+            .do((response) => console.log(response))
+            .catch(this.handleError);
+    }
+
     public GetUserDetails = (data): Observable<Users[]> => {
-        return this.http.post(this._configuration.ServerWithApiUrl + 'users', data, { headers: this.headers })
+        return this.http
+            .post(this._configuration.ServerWithApiUrl + 'users', data, { headers: this.headers })
             .map(this.extractData)
             .do((response) => console.log(response))
             .catch(this.handleError);

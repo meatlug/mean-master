@@ -1,6 +1,7 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var helpers = require('./helpers');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const helpers = require('./helpers');
 
 module.exports = {
   entry: {
@@ -42,9 +43,17 @@ module.exports = {
         use: ['file-loader?name=images/[name].[hash].[ext]']
       },
       {
-        test: /\.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-        include: [helpers.root('client', 'content')]
+        test: /\.css$/,
+        exclude: helpers.root('client', 'app'),
+        loader: ExtractTextPlugin.extract({
+          fallbackLoader: 'style-loader',
+          loader: 'css-loader?sourceMap'
+        })
+      },
+      {
+        test: /\.css$/,
+        include: helpers.root('client', 'app'),
+        loader: 'raw-loader'
       }
     ]
   },
