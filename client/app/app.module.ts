@@ -11,14 +11,15 @@ import { AppService } from '../app/Services/app.service';
 import { LoginService } from '../app/Services/login.service';
 import { NavbarComponent } from './Components/navbar/navbar.component';
 import { PathNotFoundComponent } from './Components/pathNotFound/pathNotFound.component';
-import { UserValidator } from "./Validators/user.validator";
+import { UserValidator } from './Validators/user.validator';
 
 @NgModule({
   imports: [BrowserModule,
     Routing,
     FormsModule,
     HttpModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    CommonModule],
   declarations: [AppComponent, PathNotFoundComponent, LoginComponent, NavbarComponent],
   providers: [Constants, AppService, LoginService, UserValidator],
   bootstrap: [AppComponent]
