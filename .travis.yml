@@ -12,7 +12,7 @@ node_js:
   - "node"
 
 before_install:
-  - npm install npm@latest -g
+  - npm install npm@5 -g
   - npm cache verify
   - npm prune
   - npm update
