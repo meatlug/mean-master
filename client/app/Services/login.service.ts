@@ -15,9 +15,9 @@ export class LoginService {
     /**
      * CheckUserLogin
      */
-    public CheckUserLogin(data): Observable<Users[]> {
+    public checkUserAvailability(data): Observable<Users[]> {
         return this.http
-            .post(this._configuration.ServerWithApiUrl + 'login', data, { headers: this.headers })
+            .post(this._configuration.ServerWithApiUrl + 'checkUser', data, { headers: this.headers })
             .map(this.extractData)
             .do((response) => console.log(response))
             .catch(this.handleError);
