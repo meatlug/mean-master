@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-
+import {Router } from '@angular/router';
 @Component({
     selector: 'navbar',
-    templateUrl: 'navbar.component.html'
+    templateUrl: 'navbar.component.html',
+    styleUrls:['navbar.component.css']
 })
 
 export class NavbarComponent implements OnInit {
-    constructor() { }
+    constructor(private router:Router) { }
 
     ngOnInit() { }
+
+    logOut(){
+        localStorage.removeItem('token');
+        this.router.navigate(['login']);
+    }
 }

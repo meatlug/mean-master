@@ -1,0 +1,17 @@
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.dragger {
+    position :absolute;
+    top :40%;
+    left:10%;
+}
+
+p{
+    color:red;
+}

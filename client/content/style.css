@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster|Mako');
+@import "~bootstrap/dist/css/bootstrap.css";
 
 body {
-   background: skyblue;
+  background: purple;
 }

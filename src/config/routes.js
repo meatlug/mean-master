@@ -4,7 +4,7 @@
  * Module Dependecies
  */
 const path = require('path');
-const express = require('express');
+const express = require('express'); 
 const _ = require('lodash');
 const index = require(path.join(__dirname, '..', 'app/controllers/index'));
 const user = require(path.join(__dirname, '..', 'app/controllers/users'));
@@ -14,13 +14,11 @@ const user = require(path.join(__dirname, '..', 'app/controllers/users'));
  */
 module.exports = function (app) {
     app.use('/', index);
-    app.get('api/users/auth', user.getToken, (req, res) => {
+    app.get('/api/users/authenticate', user.getToken, (req, res) => {
         res.send(req.user);
     });
-    app.post('api/users', user.createUser);
+    app.post('/api/signUp', user.createUser);
     app.use('*', index);
-    app.post('api/users/login', user.loginUser);
-    app.get('api/checkUser', (req, res) => {
-        res.send(true);
-    })
+    app.post('/api/users/login', user.loginUser);
+    app.post('api//')
 };  

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { JwtHelper } from 'angular2-jwt';
 import { Headers, Http, Response } from '@angular/http';
 import { Constants } from '../Constants/app.constant';
 import { Observable } from 'rxjs/Observable';
@@ -15,7 +16,7 @@ export class LoginService {
     /**
      * CheckUserLogin
      */
-    public checkUserAvailability(data): Observable<Users[]> {
+    public checkUserAvailability (data): Observable<Users[]> {
         return this.http
             .post(this._configuration.ServerWithApiUrl + 'checkUser', data, { headers: this.headers })
             .map(this.extractData)
@@ -29,6 +30,10 @@ export class LoginService {
             .map(this.extractData)
             .do((response) => console.log(response))
             .catch(this.handleError);
+    }
+
+    public isLoggedIn(){
+
     }
 
     private extractData(res: Response) {

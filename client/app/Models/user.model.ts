@@ -1,3 +1,4 @@
-export class Users {
-    constructor(UserName: string, Password: string) { }
+export interface Users {
+    UserName: String;
+    Password: String;
 }

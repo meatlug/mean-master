@@ -9,6 +9,6 @@
     "src",
     "public"
   ],
-  "delay": "2500",
+  "delay": "1000",
   "ext": "js json"
 }

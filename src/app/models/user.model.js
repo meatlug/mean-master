@@ -9,7 +9,6 @@ const validator = require('validator');
 const jwt = require('jsonwebtoken');
 const _ = require('lodash');
 const bcrypt = require('bcryptjs');
-
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     email: {
@@ -22,6 +21,15 @@ const UserSchema = new Schema({
             validator: validator.isEmail,
             message: '{VALUE} is not a valid email'
         },
+    },
+    firstName:{
+        type:String,
+        require:true,
+        default:''
+    },
+    lastName:{
+        type:String,
+        default:''
     },
     password: {
         type: String,
@@ -43,7 +51,7 @@ const UserSchema = new Schema({
 UserSchema.methods.generateAuthToken = function () {
     var user = this;
     var access = 'auth';
-    var token = jwt.sign({ _id: user._id.toHexString(), access }, '123').toString();
+    var token = jwt.sign({ _id: user._id.toHexString(), access }, 'abc123').toString();
 
     user.tokens.push({ access, token });
     return user.save().then(() => {
@@ -55,7 +63,7 @@ UserSchema.methods.toJSON = function () {
     var user = this;
     var userObject = user.toObject();
 
-    return _.pick(userObject, ['_id', 'email']);
+    return _.pick(userObject, ['_id', 'firstName']);
 };
 
 UserSchema.statics.findByToken = function (token) {
@@ -107,4 +115,5 @@ UserSchema.statics.findByLogin = function (email, password) {
         })
     })
 }; 
+
 mongoose.model('User', UserSchema);

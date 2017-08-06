@@ -1,42 +1,50 @@
 <div class="container loginForm">
 
- <h1>Login</h1><hr/><br />
+  <h1>Login</h1>
+  <hr/><br />
 
-  <form  novalidate name="loginForm" (ngSubmit)="LoginCheck(user)" [formGroup]="loginForm">
+  <form novalidate name="loginForm" (ngSubmit)="LoginCheck(user)" [formGroup]="loginForm">
 
     <!---User Name -->
-    <div class="form-group">
+    <div class="form-group has-feedback" [ngClass]="{'has-error':username.invalid && username.touched, 'has-success':username.valid}">
       <div class="input-group">
-      <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
-      <input type="text"
-             class="form-control"
-             placeholder="Username"
-             aria-label="User Name"
-             required
-             formControlName="userName"
-             [(ngModel)]="user.UserName">
+        <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
+        <input type="text" class="form-control" placeholder="Username" aria-label="User Name" required formControlName="userName"
+          [(ngModel)]="user.UserName">
+      </div>
+      <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
+        <span *ngIf="username.hasError('minlength')" class="help-block" aria-hidden="true">
+         Min Length is not met
+       </span>
+        <span *ngIf="username.hasError('maxlength')" class="help-block" aria-hidden="true">
+         Max Length exceeded
+       </span>
+        <span *ngIf="username.hasError('required')" class="help-block" aria-hidden="true">
+         Username is required
+       </span>
+        <span *ngIf="username.hasError('pattern')" class="help-block" aria-hidden="true">
+         Pattern is Invalid
+       </span>
+      </div>
     </div>
-   </div>
 
     <!-- Password -->
-   <div class="form-group">
-     <div class="input-group">
-      <span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-lock"></i></span>
-      <input type="password"
-             class="form-control"
-             placeholder="Password"
-             aria-label="User Name"
-             required
-             formControlName="password"
-             [(ngModel)]="user.Password">
-     </div>
+    <div class="form-group has-feedback" [ngClass]="{'has-error':password.invalid && password.touched, 'has-success':password.valid}">
+      <div class="input-group">
+        <span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-lock"></i></span>
+        <input type="password" class="form-control" placeholder="Password" aria-label="User Name" formControlName="password" [(ngModel)]="user.Password">
+      </div>
+
+      <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
+        <span *ngIf="password.hasError('minlength')" class="help-block" aria-hidden="true">Min Length is not met</span>
+        <span *ngIf="password.hasError('maxlength')" class="help-block" aria-hidden="true">Max Length exceeded</span>
+        <span *ngIf="password.hasError('required')" class="help-block" aria-hidden="true">Password is required</span>
+      </div>
+
     </div>
 
     <div>
-       <button type="submit"
-               class="btn btn-block btn-primary"
-               id="btnSubmit"
-               [disabled]="!loginForm.valid">
+      <button type="submit" class="btn btn-block btn-primary" id="btnSubmit" [disabled]="!loginForm.valid">
         Login
       </button>
     </div>
