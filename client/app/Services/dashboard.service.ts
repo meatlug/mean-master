@@ -1,19 +1,20 @@
-import { Constants } from './../Constants/app.constant';
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import { Constants } from '../Constants/app.constant';
 
 @Injectable()
-export class SignUpService {
+export class DashBoardService {
+  private headers = new Headers({ 'Content-Type': 'application/json' });
   constructor(private http: Http, private config: Constants) {}
 
-  registerUserDetails(data) {
+  getUserDetails(data) {
+      console.log(data,'dashboard service');
     return this.http
-      .post(this.config.ServerWithApiUrl + 'SignUp', data)
+      .get(this.config + 'userDetails',data)
       .map(this.extractData)
-      .do(response => console.log(response))
       .catch(this.handleError);
   }
 
@@ -24,7 +25,6 @@ export class SignUpService {
   }
 
   private handleError(error: Response) {
-    console.log(error);
     return Observable.throw(error.json() || 'server error');
   }
 }

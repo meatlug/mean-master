@@ -16,7 +16,7 @@ export class UserValidator {
   static UserNameCheck(control: AbstractControl, service: LoginService): Promise<ValidationErrors | null> {
 
     return new Promise((resolve, reject) => {
-      service.checkUserAvailability(control.value).subscribe(
+      service.checkUserDetails(control.value).subscribe(
         data => {
           if (data.length === 0 || data.length === 1) {
             resolve(null);

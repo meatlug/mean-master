@@ -19,6 +19,6 @@ module.exports = function (app) {
     });
     app.post('/api/signUp', user.createUser);
     app.use('*', index);
-    app.post('/api/users/login', user.loginUser);
-    app.post('api//')
+    app.post('/api/login', user.loginUser);
+    app.post('api/')
 };  

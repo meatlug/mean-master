@@ -6,7 +6,6 @@ export class AuthenticateService {
   constructor(private http: Http) {}
 
   isLoggedOn() {
-    // return tokenNotExpired();
-    return false;
+    return tokenNotExpired();
   }
 }

@@ -20,15 +20,15 @@ export class LoginComponent implements OnInit {
         this.loginForm = fb.group({
             userName: ['',
                 Validators.compose([Validators.required,
-                                    Validators.pattern('^[0-9]*$'),
-                                    Validators.minLength(5),
-                                    Validators.maxLength(5)])],
+                                    Validators.pattern(''),
+                                    Validators.minLength(5)])],
             password: ['',
                        Validators.compose([Validators.required,
                                            Validators.minLength(6),
                                            Validators.maxLength(10)])]
         });
     }
+    errorMessage;
     ngOnInit() {
         this.user = {
             UserName: '',
@@ -50,11 +50,11 @@ export class LoginComponent implements OnInit {
     LoginCheck() {
         if (!this.user) { return; }
         this.loginService
-            .GetUserDetails(this.user)
-            .subscribe(response => {
-                this.router.navigate(['profile']);
+            .checkUserDetails(this.user)
+             .subscribe(response => {
+                    this.router.navigate(['/profile' ,{ response: response}]);
             },
-            error => this.errormessage = <any>error,
+            error => this.errorMessage = <any>error,
             () => console.log('Get all Items complete'));
     }
 }

@@ -19,6 +19,7 @@ import { NavbarComponent } from './Components/navbar/navbar.component';
 import { PathNotFoundComponent } from './Components/pathNotFound/pathNotFound.component';
 import { UserValidator } from './Validators/user.validator';
 import { NoAccessComponent } from './Components/noAccess/noAccess.component';
+import { DashBoardService } from "./Services/dashboard.service";
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { NoAccessComponent } from './Components/noAccess/noAccess.component';
     AppService,
     LoginService,
     SignUpService,
+    DashBoardService,
     UserValidator,
     AuthenticateService,
     AuthGuard
