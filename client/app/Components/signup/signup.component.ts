@@ -1,7 +1,7 @@
 import { SignUpService } from '../../Services/signup.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Signup } from './../../Models/sigup.model';
+import { User } from './../../Models/user.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -12,7 +12,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class SignUpComponent implements OnInit {
     public signUpForm: FormGroup;
-    public signUp: Signup;
+    public signUp: User;
     public errorMessage: string;
 
     constructor(private fb: FormBuilder, private router: Router, private service: SignUpService) {
@@ -34,7 +34,7 @@ export class SignUpComponent implements OnInit {
         };
      }
 
-    signUpUser(model: Signup) {
+    signUpUser(model: User) {
             this.service
                 .registerUserDetails(model)
                 .subscribe(response => {

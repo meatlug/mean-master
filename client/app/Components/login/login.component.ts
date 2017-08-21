@@ -1,9 +1,10 @@
+import { AuthenticateService } from '../../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { Users } from '../../Models/user.model';
+import { User } from '../../Models/user.model';
 // import { UserValidator } from '../../Validators/user.validator';
 import { LoginService } from '../../Services/login.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'login',
@@ -12,15 +13,21 @@ import { Router } from '@angular/router';
 })
 
 export class LoginComponent implements OnInit {
-    errormessage: string;
-    user: Users;
+    errorMessage: string;
+    user: User;
     loginForm: FormGroup;
+    returnUrl: string;
 
-    constructor(private fb: FormBuilder, private loginService: LoginService, private router: Router) {
+    constructor(private router: Router,
+                private fb: FormBuilder,
+                private route: ActivatedRoute,
+                private loginService: LoginService,
+                private authenticate: AuthenticateService ) {
+
         this.loginForm = fb.group({
             userName: ['',
-                Validators.compose([Validators.required,
-                                    Validators.pattern(''),
+                       Validators.compose([Validators.required,
+                                    Validators.pattern(``),
                                     Validators.minLength(5)])],
             password: ['',
                        Validators.compose([Validators.required,
@@ -28,11 +35,18 @@ export class LoginComponent implements OnInit {
                                            Validators.maxLength(10)])]
         });
     }
-    errorMessage;
+
     ngOnInit() {
-        this.user = {
-            UserName: '',
-            Password: ''
+        // reset login status
+    this.authenticate.logOut();
+
+        // get return url from route parameters or default to '/'
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    console.log(this.returnUrl);
+
+    this.user = {
+            email: '',
+            password: ''
         };
      }
 
@@ -52,7 +66,7 @@ export class LoginComponent implements OnInit {
         this.loginService
             .checkUserDetails(this.user)
              .subscribe(response => {
-                    this.router.navigate(['/profile' ,{ response: response}]);
+                    this.router.navigate(['/profile']);
             },
             error => this.errorMessage = <any>error,
             () => console.log('Get all Items complete'));

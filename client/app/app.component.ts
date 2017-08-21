@@ -1,7 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 import '../content/style.css';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 
 @Component({
   selector: 'mean-app',
@@ -11,20 +14,21 @@ import '../content/style.css';
 export class AppComponent implements OnInit, OnDestroy {
 
 
-  constructor(private titleService: Title, private router: Router) { }
+  constructor(private router: Router,
+              private titleService: Title,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    const self = this;
-    let Header: any;
-
-    setTimeout(function () {
-      self.router.config.forEach((router) => {
-        if (self.router.url === '/' + router.path) {
-          Header = router.data;
-        }
-      });
-      self.titleService.setTitle(Header.Title);
-    }, 1000);
+    this.router.events
+    .filter((event) => event instanceof NavigationEnd)
+    .map(() => this.activatedRoute)
+    .map((route) => {
+      while (route.firstChild) route = route.firstChild;
+      return route;
+    })
+    .filter((route) => route.outlet === 'primary')
+    .mergeMap((route) => route.data)
+    .subscribe((event) => this.titleService.setTitle(event['title']));
   }
 
   ngOnDestroy() { }

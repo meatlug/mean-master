@@ -3,19 +3,19 @@
 /**
  * Module dependencies.
  */
-
-const mongoose = require('mongoose');
-const validator = require('validator');
-const jwt = require('jsonwebtoken');
+require('dotenv').config();
 const _ = require('lodash');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
+const validator = require('validator');
 const Schema = mongoose.Schema;
+
 const UserSchema = new Schema({
     email: {
         type: String,
         required: true,
         trim: true,
-        minlength: 1,
         unique: true,
         validate: {
             validator: validator.isEmail,
@@ -48,10 +48,16 @@ const UserSchema = new Schema({
     }]
 });
 
+/**
+ * Methods
+ */
+
 UserSchema.methods.generateAuthToken = function () {
     var user = this;
     var access = 'auth';
-    var token = jwt.sign({ _id: user._id.toHexString(), access }, '123').toString();
+    var token = jwt.sign({ _id: user._id.toHexString(), access },
+                           process.env.AUTHENTICATE_SECRET,
+                           {expiresIn : 60*60*24}).toString();
 
     user.tokens.push({ access, token });
     return user.save().then(() => {
@@ -70,7 +76,7 @@ UserSchema.statics.findByToken = function (token) {
     var User = this;
     var decoded;
     try {
-        decoded = jwt.verify(token, 'abc123');
+        decoded = jwt.verify(token, process.env.AUTHENTICATE_SECRET);
     } catch (e) {
         return Promise.reject();
     }
@@ -99,6 +105,7 @@ UserSchema.pre('save', function (next) {
 
 UserSchema.statics.findByLogin = function (email, password) {
     var User = this;
+
     return User.findOne({ email }).then((user) => {
         if (!user) {
             return Promise.reject();
@@ -107,8 +114,10 @@ UserSchema.statics.findByLogin = function (email, password) {
         return new Promise((resolve, reject) => {
             bcrypt.compare(password, user.password, (err, res) => {
                 if (res) {
+                    console.log(res);
                     resolve(user);
                 } else {
+                    console.log(err);
                     reject();
                 }
             });

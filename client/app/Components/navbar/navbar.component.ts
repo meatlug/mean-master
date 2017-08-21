@@ -1,3 +1,4 @@
+import { AuthenticateService } from '../../Services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import {Router } from '@angular/router';
 @Component({
@@ -7,12 +8,12 @@ import {Router } from '@angular/router';
 })
 
 export class NavbarComponent implements OnInit {
-    constructor(private router:Router) { }
+    constructor(private router: Router, private authenticate: AuthenticateService) { }
 
     ngOnInit() { }
 
-    logOut(){
-        localStorage.removeItem('token');
-        this.router.navigate(['login']);
+    logOut() {
+        this.authenticate.logOut();
+        this.router.navigate(['/login']);
     }
 }

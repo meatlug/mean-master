@@ -10,12 +10,12 @@ module.exports = webpackMerge(commonConfig, {
 
   output: {
     path: helpers.root('public'),
-    filename: '[name].js',
+    filename: 'js/[name].js',
     chunkFilename: '[id].chunk.js',
     sourceMapFilename: '[file].map'
   },
   plugins: [
-    new ExtractTextPlugin('[name].css'),
+    new ExtractTextPlugin('css/[name].css'),
     new OptimizeJsPlugin({
       sourceMap: true
     }),

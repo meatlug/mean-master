@@ -13,7 +13,7 @@ module.exports = webpackMerge(commonConfig, {
 
   output: {
     path: helpers.root('public'),
-    filename: '[name].[hash].js',
+    filename: 'js/[name].[hash].js',
     chunkFilename: '[name].[hash].chunk.js'
   },
 
@@ -30,7 +30,7 @@ module.exports = webpackMerge(commonConfig, {
         'NODE_ENV': JSON.stringify('production')
       }
     }),
-    new ExtractTextPlugin('[name].[hash].css'),
+    new ExtractTextPlugin('css/[name].[hash].css'),
     new webpack.optimize.UglifyJsPlugin({
       beautify: false,
       mangle: {

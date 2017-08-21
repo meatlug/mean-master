@@ -8,4 +8,8 @@ export class AuthenticateService {
   isLoggedOn() {
     return tokenNotExpired();
   }
+
+  logOut(){
+    localStorage.removeItem('token');
+  }
 }

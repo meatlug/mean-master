@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
 import { Constants } from '../Constants/app.constant';
 import { Observable } from 'rxjs/Observable';
-import { Users } from '../Models/user.model';
+import { User } from '../Models/user.model';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
@@ -12,7 +12,7 @@ export class AppService {
     private headers = new Headers({ 'Content-Type': 'application/json' });
     constructor(private http: Http, private _configuration: Constants) { }
 
-    public GetUserDetails = (data): Observable<Users[]> => {
+    public GetUserDetails = (data): Observable<User[]> => {
         return this.http.post(this._configuration.ServerWithApiUrl + 'users', data, { headers: this.headers })
             .map(this.extractData)
             .do((response) => console.log(response))
