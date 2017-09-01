@@ -2,6 +2,9 @@ sudo: false
 public: trusty
 language: node_js
 
+services:
+  - docker
+
 cache:
   directories:
     - node_modules
@@ -14,11 +17,14 @@ node_js:
 before_install:
   - npm install npm@5 -g
   - npm cache verify
-  - npm prune
   - npm update
 
 install:
   - npm install
+
+after_success:
+  -docker --version
+  
 
 script:
   - npm run ci:travis

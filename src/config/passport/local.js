@@ -1,7 +1,7 @@
 "use strict";
 
 /**
- * Module Dependecies
+ * Module Dependencies
  */
 
 const mongoose = require("mongoose");

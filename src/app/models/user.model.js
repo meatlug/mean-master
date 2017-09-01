@@ -65,7 +65,7 @@ UserSchema.methods = {
             return token;
         });
     },
-    toJSON = function () {
+    toJSON : function () {
         var user = this;
         var userObject = user.toObject();
     

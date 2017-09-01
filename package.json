@@ -17,7 +17,7 @@
   "author": "Raghavan U <rockonwithraghavan@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "build:docker": "npm build:prod && docker build -f Dockerfile -t mean:latest .",
+    "build:docker": "npm run build:prod && docker build -f Dockerfile -t mean:latest .",
     "build:dev": "webpack --env=dev --progress --profile --colors",
     "build:prod": "webpack --env=prod",
     "ci:travis": "npm run lint",
@@ -29,6 +29,7 @@
     "dev": "npm run clean && concurrently \"npm run build:dev\" \"npm run nodemon\"",
     "nodemon": "nodemon server.js",
     "rimraf": "rimraf",
+    "docker": "docker",
     "eslint": "eslint",
     "tslint": "tslint",
     "webpack": "webpack"
