@@ -24,13 +24,6 @@ module.exports = webpackMerge(commonConfig, {
     }),
   ],
   watch: true,
-  // devServer: {
-  //   historyApiFallback: true,
-  //   stats: 'minimal',
-  //   contentBase: path.join(__dirname, '..', "public"),
-  //   compress: true,
-  //   port: 9000
-  // },
   watchOptions: {
     aggregateTimeout: 300,
     poll: 1000

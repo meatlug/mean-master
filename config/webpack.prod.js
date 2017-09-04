@@ -16,32 +16,23 @@ module.exports = webpackMerge(commonConfig, {
     filename: 'js/[name].[hash].js',
     chunkFilename: '[name].[hash].chunk.js'
   },
-
   plugins: [
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-      debug: false
-    }),
-    new OptimizeJsPlugin({
-      sourceMap: true
-    }),
-    new webpack.DefinePlugin({
-      'process.env': {
-        'NODE_ENV': JSON.stringify('production')
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.optimize.UglifyJsPlugin({
+      mangle: {
+        keep_fnames: true
       }
     }),
     new ExtractTextPlugin('css/[name].[hash].css'),
-    new webpack.optimize.UglifyJsPlugin({
-      beautify: false,
-      mangle: {
-        screw_ie8: true,
-        keep_fnames: true
-      },
-      compress: {
-        screw_ie8: true,
-        warnings: false
-      },
-      comments: false
+    new webpack.DefinePlugin({
+      'process.env': {
+        'ENV': JSON.stringify(ENV)
+      }
+    }),
+    new webpack.LoaderOptionsPlugin({
+      htmlLoader: {
+        minimize: false
+      }
     })
   ]
 });

@@ -17,9 +17,9 @@
   "author": "Raghavan U <rockonwithraghavan@gmail.com>",
   "license": "ISC",
   "scripts": {
-    "build:docker": "npm run build:prod && docker build -f Dockerfile -t mean:latest .",
-    "build:dev": "webpack --env=dev --progress --profile --colors",
-    "build:prod": "webpack --env=prod",
+    "build:docker": "docker build -f Dockerfile -t mean:latest .",
+    "build:dev": "set NODE_ENV=development && webpack --env=dev --progress --profile --colors",
+    "build:prod": "set NODE_ENV=production && webpack --env=prod",
     "ci:travis": "npm run lint",
     "clean:install": "npm set progress=false && npm install",
     "clean": "rimraf public/",

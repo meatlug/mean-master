@@ -19,8 +19,8 @@ const passport = require('passport');
 // app setup
 const app = express();
 const models = path.join(__dirname, 'src/app/models');
-const port = process.env.PORT || 8080;
-const mongodbUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || 'mongodb://localhost/mean_app';
+const port = process.env.PORT || 3000;
+const mongodbUri = process.env.MONGODB_URI || process.env.MONGOLAB_URI || createUri();
 mongoose.Promise = global.Promise;
 
 //Bootstrap models
@@ -43,6 +43,20 @@ function listen() {
 function connect() {
     var options = { server: { socketOptions: { keepAlive: 1 } } };
     return mongoose.connect(mongodbUri, options).connection;
+}
+
+function createUri (){
+    let uri = null;
+    if(process.env.NODE_ENV === 'production'){
+       uri =  util.format('mongodb://%s/mean_app','mongo');
+       console.log(uri);
+       return uri;
+    }else {
+      uri = util.format('mongodb://%s/mean_app','localhost');
+      console.log(uri);
+      return uri;
+    }
+    
 }
 
 connect()
