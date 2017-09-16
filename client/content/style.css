@@ -4,3 +4,7 @@
 body {
   background: purple;
 }
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}

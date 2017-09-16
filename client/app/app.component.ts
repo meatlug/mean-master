@@ -1,3 +1,4 @@
+import { ComponentPageTitle } from './Components/pageTitle/page-title.component';
 import { Title } from '@angular/platform-browser';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
   constructor(private router: Router,
               private titleService: Title,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              public _componentPageTitle: ComponentPageTitle) { }
 
   ngOnInit() {
     this.router.events
@@ -28,7 +30,7 @@ export class AppComponent implements OnInit, OnDestroy {
     })
     .filter((route) => route.outlet === 'primary')
     .mergeMap((route) => route.data)
-    .subscribe((event) => this.titleService.setTitle(event['title']));
+    .subscribe((event) => this._componentPageTitle.title = event['Title']);
   }
 
   ngOnDestroy() { }

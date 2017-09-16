@@ -1,3 +1,4 @@
+import { ComponentPageTitle } from './Components/pageTitle/page-title.component';
 import { SignUpService } from './Services/signup.service';
 import { ButtonThemeDirective } from './Direcitves/buttonTheme.directive';
 import { SignUpComponent } from './Components/signup/signup.component';
@@ -32,6 +33,7 @@ import { DashBoardService } from "./Services/dashboard.service";
   ],
   declarations: [
     AppComponent,
+
     PathNotFoundComponent,
     LoginComponent,
     NavbarComponent,
@@ -49,7 +51,8 @@ import { DashBoardService } from "./Services/dashboard.service";
     DashBoardService,
     UserValidator,
     AuthenticateService,
-    AuthGuard
+    AuthGuard,
+    ComponentPageTitle
   ],
   bootstrap: [AppComponent]
 })
