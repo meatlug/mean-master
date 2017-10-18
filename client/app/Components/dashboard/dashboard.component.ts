@@ -19,29 +19,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
 
     ngOnInit() {
-        // let id ;
-        // this. sub = this.route.params.subscribe(params => {
-        //  id = +params['response']; // (+) converts string 'id' to a number
-
-        //     // In a real app: dispatch action to load the details here.
-        //     });
-        // this.route.paramMap
-        //     .switchMap((params: ParamMap) =>
-        //             this.service
-        //                 .getUserDetails(id))
-        //                 .subscribe((hero) => {
-        //                     this.userDetails = hero;
-        //         });
-
-        //         //this.route.paramMap.switchMap((params: ParamMap) => console.log(params.get('response')))
-        // console.log(this.userDetails);
+        
      }
 
      ngOnChanges(changes){
          console.log(changes);
      }
 
-    ngOnDestroy(){
+    ngOnDestroy() {
         //this.sub.unsubscribe();
     }
 

@@ -3,44 +3,40 @@
   <h1>Login</h1>
   <hr/><br />
 
-  <form novalidate name="loginForm" (ngSubmit)="LoginCheck(user)" [formGroup]="loginForm">
+  <form novalidate name="loginForm" (ngSubmit)="LoginCheck(loginForm)" [formGroup]="loginForm">
 
     <!---User Name -->
-    <div class="form-group has-feedback" [ngClass]="{'has-error':username.invalid && username.touched, 'has-success':username.valid}">
+    <div class="form-group has-feedback" [ngClass]="{'has-error':loginForm.get('Email').invalid && loginForm.get('Email').touched, 'has-success':loginForm.get('Email').valid}">
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon1"><i class="glyphicon glyphicon-user"></i></span>
-        <input type="text" class="form-control" placeholder="Username" aria-label="User Name" required formControlName="userName"
-          [(ngModel)]="user.UserName">
+        <input type="text"
+               class="form-control"
+               placeholder="Enter your email id"
+               aria-label="User Name"
+               required formControlName="Email">
       </div>
-      <div class="alert alert-danger" *ngIf="username.touched && username.invalid">
-        <span *ngIf="username.hasError('minlength')" class="help-block" aria-hidden="true">
-         Min Length is not met
-       </span>
-        <span *ngIf="username.hasError('maxlength')" class="help-block" aria-hidden="true">
-         Max Length exceeded
-       </span>
-        <span *ngIf="username.hasError('required')" class="help-block" aria-hidden="true">
-         Username is required
-       </span>
-        <span *ngIf="username.hasError('pattern')" class="help-block" aria-hidden="true">
-         Pattern is Invalid
-       </span>
+      <div class="alert alert-danger" *ngIf="loginForm.get('Email').touched && loginForm.get('Email').invalid">
+        <span *ngIf="loginForm.hasError('required','Email')" class="help-block" aria-hidden="true">Email Id is required</span>
+        <span *ngIf="loginForm.hasError('pattern','Email')" class="help-block" aria-hidden="true">Email Id is Invalid</span>
       </div>
     </div>
 
     <!-- Password -->
-    <div class="form-group has-feedback" [ngClass]="{'has-error':password.invalid && password.touched, 'has-success':password.valid}">
+    <div class="form-group has-feedback" [ngClass]="{'has-error':loginForm.get('Password').invalid && loginForm.get('Password').touched, 'has-success':loginForm.get('Password').valid}">
       <div class="input-group">
         <span class="input-group-addon" id="basic-addon2"><i class="glyphicon glyphicon-lock"></i></span>
-        <input type="password" class="form-control" placeholder="Password" aria-label="User Name" formControlName="password" [(ngModel)]="user.Password">
+        <input type="text" 
+               class="form-control"
+               placeholder="Enter your password"
+               aria-label="Password"
+               formControlName="Password">
       </div>
-
-      <div class="alert alert-danger" *ngIf="password.touched && password.invalid">
-        <span *ngIf="password.hasError('minlength')" class="help-block" aria-hidden="true">Min Length is not met</span>
-        <span *ngIf="password.hasError('maxlength')" class="help-block" aria-hidden="true">Max Length exceeded</span>
-        <span *ngIf="password.hasError('required')" class="help-block" aria-hidden="true">Password is required</span>
+      <div class="alert alert-danger" *ngIf="loginForm.get('Password').touched && loginForm.get('Password').invalid">
+        <span *ngIf="loginForm.hasError('minlength','Password')" class="help-block" aria-hidden="true">Min Length is not met</span>
+        <span *ngIf="loginForm.hasError('maxlength','Password')" class="help-block" aria-hidden="true">Max Length exceeded</span>
+        <span *ngIf="loginForm.hasError('required','Password')" class="help-block" aria-hidden="true">Password is required</span>
+        <span *ngIf="loginForm.hasError('pattern','Password')" class="help-block" aria-hidden="true">Password is Invalid</span>
       </div>
-
     </div>
 
     <div>

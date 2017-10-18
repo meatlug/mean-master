@@ -13,22 +13,26 @@ export class UserValidator {
   //     return config[validatorName];
   // }
 
-  static UserNameCheck(control: AbstractControl, service: LoginService): Promise<ValidationErrors | null> {
+  // static UserNameCheck(control: AbstractControl, service: LoginService): Promise<ValidationErrors | null> {
 
-    return new Promise((resolve, reject) => {
-      service.checkUserDetails(control.value).subscribe(
-        data => {
-          if (data.length === 0 || data.length === 1) {
-            resolve(null);
-          } else {
-            resolve({ EmpIdCheck: true });
-          }
-        },
-        err => {
-          resolve({ EmpIdCheck: true });
-        }
-      );
-    });
+  //   return new Promise((resolve, reject) => {
+  //     service.checkUserDetails(control.value).subscribe(
+  //       data => {
+  //         if (data.length === 0 || data.length === 1) {
+  //           resolve(null);
+  //         } else {
+  //           resolve({ EmpIdCheck: true });
+  //         }
+  //       },
+  //       err => {
+  //         resolve({ EmpIdCheck: true });
+  //       }
+  //     );
+  //   });
+  // }
+
+  static emailIdCheck(){
+    
   }
 
   constructor() {}

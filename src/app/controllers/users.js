@@ -43,7 +43,7 @@ exports.getToken = (req, res, next) => {
 };
 
 exports.loginUser = (req, res) => {
-  var body = _.pick(req.body, ["UserName", "Password"]);
+  var body = _.pick(req.body, ["email", "Password"]);
   User.findByLogin(body.UserName, body.Password)
       .then(user => {
         res.send(user);
